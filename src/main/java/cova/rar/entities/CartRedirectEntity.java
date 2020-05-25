@@ -6,6 +6,8 @@ public class CartRedirectEntity {
 	
 	private List<Product> products;
 	private String filter;
+	private String prodID;
+	private int quantity;
 	
 	public String getFilter() {
 		return filter;
@@ -13,8 +15,13 @@ public class CartRedirectEntity {
 	public void setFilter(String filter) {
 		this.filter = filter;
 	}
-	private String prodID;
-	private int quantity;
+	
+	public CartRedirectEntity() {};
+	
+	public CartRedirectEntity(String filter) {
+		this.products = null;
+		this.filter = filter;
+	}
 	
 	public CartRedirectEntity(List<Product> products, String filter) {
 		this.products = products;
