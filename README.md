@@ -1,10 +1,7 @@
-# Rent-A-Rig_Spring-MVC
+# Rent-A-Rig_SHOWCASE
 
 # --------------NOTES---------------
-Start COMPLETELY OVER. Basic HTML until functionality is there.
- - get products to list correctly with filter
- - get account info to show
- - get cart and checkout to show correctly
+New Repository to fix .gitignore issues for the FINAL SHOWCASE
 
 Log information to help debug
  - INFO log statement for each method in controller
@@ -20,4 +17,5 @@ adding navbar and footer
 
 including static resources (like css/js)
  - use link like to resource like this <link href='<spring:url value="/resources/css/mainStyles.css"/>' rel="stylesheet">
+    -- This also works <link href='<c:url value="/resources/css/mainStyles.css"/>' rel="stylesheet">
  - any urls/links in the css will be relative to the views folder (ex./ ../images/image.jpg)
