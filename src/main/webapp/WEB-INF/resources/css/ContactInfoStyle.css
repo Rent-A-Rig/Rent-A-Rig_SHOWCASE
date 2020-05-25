@@ -1,0 +1,35 @@
+
+.myRow, .myCol { /*set up text in the tables*/
+    text-align: left;
+    vertical-align: center;
+}
+
+.myContainer {
+	text-align:left;
+}
+
+
+.spacer { /*setup for text in New Contact Info Table*/
+    margin: 2px;
+}
+ 
+.dancer {
+ 	text-align: center;
+ }
+ 
+ #quicklinks {
+ color: #53565C;
+ font-size: 18pt;
+ text-decoration: underline;
+ }
+ 
+a:link, a:visited {
+    text-decoration: none;
+    color: #0080ff;
+    font-size: 14pt;
+}
+
+a:hover {
+	color: #53565C;
+	font-size: 14pt;
+}

@@ -1,0 +1,64 @@
+@charset "ISO-8859-1";
+
+body{
+	background-color:#F5F9E9; 
+	background-size: cover;
+	background-position:center;
+	background-attachment: fixed;
+	width:100%;
+	height:auto;
+}
+
+.image1{
+
+	background-image: url("../images/esports-computer.jpg");
+	background-size: cover;
+	height:350px;
+	weight:900px;
+}
+ .card-deck{
+ 	text-align: center;
+ }
+ 
+ 
+.text-info{
+	font-size:28px;
+}
+
+.image2{
+	background-image: url("../images/lenovo-folding-notebook.jpg");
+	background-size: cover;
+	background-position: center;
+	height:300px;
+	weight:300px;
+	
+}
+
+.image3{
+	background-image: url("../images/2020-hero-mobile-9.jpg");
+	background-size: cover;
+	background-position: center;
+	height:300px;
+	weight:300px;
+} 
+.text-white{
+	font-size:28px;
+}
+.image4{
+	background-image: url("../images/images (1).jfif");
+	background-size: cover;
+	height:300px;
+	weight:300px;
+}
+.text-white{
+	font-size:28px;
+}
+.container6{
+	background-color:#343a40;
+	text-align: center;
+	padding:20px;
+}  
+.quote{
+	text-color:#17a2b8;
+	
+}

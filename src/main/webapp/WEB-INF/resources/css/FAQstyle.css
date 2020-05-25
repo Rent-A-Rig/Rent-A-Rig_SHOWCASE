@@ -1,0 +1,17 @@
+.myOptions {
+	text-align: center;
+}
+
+.faq-table button, .faqbutton {
+/* 	adding color to buttons and adjusting font of ?s */
+	background-color: #30BDF4;
+	color: #ffffff;
+	border-radius: 4px;
+	font-size: 18pt;
+	font-weight: 700;
+}
+
+a { /*changing link color to the light blue*/
+    text-decoration: none;
+    color: #30BDF4;
+}

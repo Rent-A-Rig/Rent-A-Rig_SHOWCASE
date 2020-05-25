@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+
+.container {
+	max-width: 960px;
+}
+
+.lh-condensed {
+	line-height: 1.25;
+}
+
+div.number-input {
+	padding: 0px 5px;
+}
+
+.submit-btn {
+	width: 100%
+}
+
+.quantity {
+	width: 40px
+}
