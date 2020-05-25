@@ -131,3 +131,15 @@ nav.navbar {
 .container {
 	padding-top: 50px;
 }
+
+.product {
+	padding: 10px 10px 20px 10px;
+	border-bottom: 2px solid black;
+	margin-bottom: 20px;
+}
+
+.ProductTitle {
+	padding: 5px;
+	margin-bottom: 30px;
+	border-bottom: 3px solid black;
+}
