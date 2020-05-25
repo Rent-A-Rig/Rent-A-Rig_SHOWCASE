@@ -37,6 +37,10 @@
 			Products
 			<small>Showing Results for - "${cartRedirectEntity.filter}"</small>
 		</h1>
+		
+		<c:if test="${cartRedirectEntity.products[0] == null}">
+		<p>No products match your search</p>
+		</c:if>
 	
 
 		<!-- Product One -->
