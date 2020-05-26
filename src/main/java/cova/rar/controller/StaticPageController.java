@@ -69,10 +69,4 @@ public class StaticPageController {
 		return new ModelAndView("thankYou");
 	}
 	
-	@RequestMapping(value = {"/ordersummary"})
-	public ModelAndView orderHistory() {
-		return new ModelAndView("orderSummary");
-	}
-	
-	
 }
