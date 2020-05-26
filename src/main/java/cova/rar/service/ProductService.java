@@ -34,25 +34,12 @@ public class ProductService {
 		List<Product> tabProducts = new ArrayList<Product>();
 		List<Product> allProducts = productDao.getCategory(filter);
 		
-		if (i==1) {
-			for (Product product : allProducts) {
-				if (product.getCategory().contains("desktop") || product.getCategory().contains("thinandlight")) {
-					tabProducts.add(product);
-				}
-			}
-		}
-		else if (i==2) {
-			for (Product product : allProducts) {
-				if (product.getCategory().contains("monitor") || product.getCategory().contains("gaminglaptop")) {
-					tabProducts.add(product);
-				}
-			}
-		}
-		else if (i==3) {
-			for (Product product : allProducts) {
-				if (product.getCategory().contains("accessories") || product.getCategory().contains("tablet")) {
-					tabProducts.add(product);
-				}
+		// magic filters values should be replaced
+		final String[][] filters = {{"desktop", "thinandlight"},{"monitor","gaminglaptop"},{"accessories","tablet"}};
+		
+		for (Product product : allProducts) {
+			if (product.getCategory().contains(filters[i][0]) || product.getCategory().contains(filters[i][1])) {
+				tabProducts.add(product);
 			}
 		}
 		

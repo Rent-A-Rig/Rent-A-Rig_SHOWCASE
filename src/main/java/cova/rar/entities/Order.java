@@ -10,7 +10,14 @@ public class Order {
 	private int id;
 	private List<Item> items;
 	
-	
+	private double getTotal() {
+		double total = 0;
+		for (Item item : items) {
+			total += item.getQty() * item.getProduct().getPrice();
+		}
+		return total;
+	}
+
 	public int getId() {
 		return id;
 	}
