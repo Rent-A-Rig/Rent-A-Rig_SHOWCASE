@@ -72,29 +72,17 @@
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="firstName">First name</label> <input type="text"
-								class="form-control" id="firstName" placeholder="" value=""
+								class="form-control" id="firstName" placeholder="" value="${cookie.firstname.value}"
 								required="">
 							<div class="invalid-feedback">Valid first name is required.
 							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="lastName">Last name</label> <input type="text"
-								class="form-control" id="lastName" placeholder="" value=""
+								class="form-control" id="lastName" placeholder="" value="${cookie.lastname.value}"
 								required="">
 							<div class="invalid-feedback">Valid last name is required.
 							</div>
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="username">Username</label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text">@</span>
-							</div>
-							<input type="text" class="form-control" id="username"
-								placeholder="Username" required="">
-							<div class="invalid-feedback" style="width: 100%;">Your
-								username is required.</div>
 						</div>
 					</div>
 					<div class="mb-3">
@@ -197,11 +185,6 @@
 							id="same-address"> <label class="custom-control-label"
 							for="same-address">Shipping address is the same as my
 							billing address</label>
-					</div>
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="save-info">
-						<label class="custom-control-label" for="save-info">Save
-							this information for next time</label>
 					</div>
 					<hr class="mb-4">
 					<h4 class="mb-3">Payment</h4>

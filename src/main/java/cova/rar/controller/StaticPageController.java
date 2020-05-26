@@ -68,4 +68,5 @@ public class StaticPageController {
 	public ModelAndView thankyou() {
 		return new ModelAndView("thankYou");
 	}
+	
 }
