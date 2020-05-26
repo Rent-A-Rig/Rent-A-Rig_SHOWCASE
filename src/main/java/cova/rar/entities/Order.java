@@ -9,14 +9,19 @@ public class Order {
 	private Date date;
 	private int id;
 	private List<Item> items;
+	private double total;
 	
-	private double getTotal() {
-		double total = 0;
-		for (Item item : items) {
+	public double getTotal() {
+		return this.total;
+	}
+	
+	public void setTotal() {
+		this.total = 0;
+		for (Item item : this.items) {
 			total += item.getQty() * item.getProduct().getPrice();
 		}
-		return total;
 	}
+	
 
 	public int getId() {
 		return id;
@@ -35,6 +40,7 @@ public class Order {
 	}
 	public void setItems(List<Item> items) {
 		this.items = items;
+		setTotal();
 	}
 
 	

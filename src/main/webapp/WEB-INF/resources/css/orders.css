@@ -60,4 +60,10 @@ background:#eee;
 	width: 150px;
 }
 
+.table-row {
+	padding-bottom: 30px;
+	border-bottom: 2px solid black;
+	margin-bottom: 30px;
+}
+
 

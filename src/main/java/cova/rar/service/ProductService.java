@@ -38,7 +38,7 @@ public class ProductService {
 		final String[][] filters = {{"desktop", "thinandlight"},{"monitor","gaminglaptop"},{"accessories","tablet"}};
 		
 		for (Product product : allProducts) {
-			if (product.getCategory().contains(filters[i][0]) || product.getCategory().contains(filters[i][1])) {
+			if (product.getCategory().contains(filters[i-1][0]) || product.getCategory().contains(filters[i-1][1])) {
 				tabProducts.add(product);
 			}
 		}

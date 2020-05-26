@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,8 @@
 	rel="stylesheet">
 </head>
 <body>
+<jsp:include page="navbar.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 		<div class="row">
 			<!-- BEGIN INVOICE -->
@@ -55,18 +58,18 @@
 						<div class="row justify-content-between">
 							<div class="col-xs-6 float-left">
 								<address>
-									<strong>Billed To:</strong><br>${user.name}<br>
+									<strong>Billed To:</strong><br>${user.firstname} ${user.lastname}<br>
 									${user.address.line1}, ${user.address.line2}<br>
 									${user.address.state}, ${user.address.zip}<br> <abbr
-										title="Phone">P:</abbr> ${user.address.phone}
+										title="Phone">P:</abbr> ${user.phone}
 								</address>
 							</div>
 							<div class="col-xs-6 text-right float-right">
 								<address>
-									<strong>Shipped To:</strong><br>${user.name}<br>
+									<strong>Shipped To:</strong><br>${user.firstname} ${user.lastname}<br>
 									${user.address.line1}, ${user.address.line2}<br>
 									${user.address.state}, ${user.address.zip}<br> <abbr
-										title="Phone">P:</abbr> ${user.address.phone}
+										title="Phone">P:</abbr> ${user.phone}
 								</address>
 							</div>
 						</div>
@@ -95,12 +98,14 @@
 										</tr>
 									</thead>
 									<tbody>
+									<c:forEach var="item" items="${order.items}">
 										<tr>
 											<td class="order-row"><strong>${item.product.name}</strong><br>
 												${item.product.shortDesc}</td>
-											<td class="text-center">${item.quantity}</td>
-											<td class="text-right">$${item.product.price}</td>
+											<td class="text-center">${item.qty}</td>
+											<td class="text-right">$${item.product.price * item.qty}</td>
 										</tr>
+									</c:forEach>
 										<tr>
 											<td colspan="1"></td>
 											<td class="text-right"><strong>Taxes</strong></td>
@@ -109,7 +114,7 @@
 										<tr>
 											<td colspan="1"></td>
 											<td class="text-right"><strong>Total</strong></td>
-											<td class="text-right"><strong>$${orders.total}</strong></td>
+											<td class="text-right"><strong>$${order.total}</strong></td>
 										</tr>
 									</tbody>
 								</table>
@@ -121,5 +126,6 @@
 			<!-- END INVOICE -->
 		</div>
 	</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

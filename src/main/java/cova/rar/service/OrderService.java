@@ -40,5 +40,11 @@ public class OrderService {
 		
 		return orders;
 	}
+	
+	public Order getLastOrder(Cart cart, String userID) {	
+		Order lastOrder = orderDao.getLastOrder(userID);
+		lastOrder.setItems(cart.getItems());
+		return lastOrder;
+	}
 
 }
