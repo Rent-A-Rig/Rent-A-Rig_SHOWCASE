@@ -25,7 +25,7 @@ public class StaticPageController {
 	
 	// map requestmappings to static pages
 	@RequestMapping(value= {"/home"})
-	public ModelAndView home() {
+	public ModelAndView home() {	
 		return new ModelAndView("home");
 	}
 	
