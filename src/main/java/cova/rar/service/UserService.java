@@ -27,7 +27,10 @@ public class UserService {
   public Login validateUser(Login login) {
     return userDao.validateUser(login);
   }
-
+  
+  public Login validateAdmin(Login login) {
+	  return userDao.validateAdmin(login);
+  }
   public void setUserCookies(HttpServletRequest request, HttpServletResponse response) {
 
 	  String username = cookieMonster.getCookie("username", request).getValue();
