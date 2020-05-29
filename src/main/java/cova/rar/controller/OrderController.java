@@ -17,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import cova.rar.entities.Cart;
+import cova.rar.entities.Item;
 import cova.rar.entities.Order;
 import cova.rar.entities.OrderHistory;
 import cova.rar.service.CookieMonster;
@@ -50,9 +51,16 @@ public class OrderController {
 		String userID = cookieMonster.getCookie("username", request).getValue();
 
 		// update products inventory
-		// if product inventory is less than one -> do not update and mark product
-		// get orders from database
-		orderService.addCart(cart, userID);
+		// if product inventory is less than cart item qty then return updated cart (else return null)
+		// return back to cart with message before checkout
+		Cart updatedCart = orderService.addCart(cart, userID);
+		if (null != updatedCart) {
+			
+			cart = updatedCart;
+			mv.setViewName("redirect:/cartUpdated");
+			mv.addObject("cart", cart);
+			return mv;
+		}
 		
 		// reset cart in session
 		status.setComplete();

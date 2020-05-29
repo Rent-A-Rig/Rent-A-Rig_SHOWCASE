@@ -59,7 +59,10 @@
 						<strong>$${cart.total}/month</strong>
 					</li>
 					<li class="list-group-item d-flex justify-content-between">
-						<button type="submit" class="submit-btn">Update Cart</button>
+						<button type="submit" class="submit-btn btn-primary btn-lg btn-block"">Update Cart</button>
+					</li>
+					<li class="list-group-item d-flex justify-content-between">
+						<span style="color:red">${stockUpdateMessge}</span>
 					</li>
 				</ul>
 				
