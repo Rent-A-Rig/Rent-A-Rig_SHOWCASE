@@ -46,34 +46,7 @@ public class LoginController {
 		return mv;
 	}
 	
-//	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-//	public ModelAndView showAdminLogin(HttpServletRequest request, HttpServletResponse response) {
-//		ModelAndView mv = new ModelAndView("admin_login");
-//		mv.addObject("login", new Login());
-//
-//		return mv;
-//	}
-	
-//	@RequestMapping(value = "/adminhome", method = RequestMethod.GET)
-//	public ModelAndView showAdmin(HttpServletRequest request, HttpServletResponse response) {
-//		ModelAndView mv = new ModelAndView("adminhome");
-//		//mv.addObject("login", new Login());
-//
-//		return mv;
-//	}
-	
-//	@PostMapping("/adminloginprocess")
-//	public String adminLoginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
-//		//Login loginUser = userService.
-//		if (bindingResult.hasErrors()) {
-//			System.out.println("has error!");
-//			return "login";
-//		}
-//		
-//		//if not admin, return back to login
-//		
-//		return "redirect:adminhome";
-//	}
+
 	
 	@PostMapping("/loginProcess")
 	public String loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {

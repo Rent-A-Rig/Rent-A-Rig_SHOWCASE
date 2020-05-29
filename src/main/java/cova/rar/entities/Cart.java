@@ -70,6 +70,15 @@ public class Cart {
 		return index;
 	}
 	
+	public void updateItemQty(Item item, int num) {
+		
+		int index = getItemIndex(item);
+		if (index != -1) {
+			items.get(index).setQty(num);
+			updateTotal();
+		}
+		
+	}
 	
 	
 	public int getNumItems() {

@@ -72,6 +72,7 @@ h2 {
 	<br>
 	<h2>More Features Will Be Coming Soon... To A Rent-A-Rig Near You! ;)</h2>
 	<br>
+	<a href="orderhistory"> View Order History </a>
 	<jsp:include page="footer.jsp"></jsp:include>
 
 </body>

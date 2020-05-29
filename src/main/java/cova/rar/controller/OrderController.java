@@ -1,5 +1,7 @@
 package cova.rar.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,51 +17,75 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import cova.rar.entities.Cart;
+import cova.rar.entities.Item;
+import cova.rar.entities.Order;
 import cova.rar.entities.OrderHistory;
 import cova.rar.service.CookieMonster;
 import cova.rar.service.OrderService;
+import cova.rar.service.UserService;
 
 @Controller
 @SessionAttributes("cart")
 public class OrderController {
-	
+
 	@Autowired
 	OrderService orderService;
 	
 	@Autowired
+	UserService userService;
+
+	@Autowired
 	CookieMonster cookieMonster;
-	
+
 	@ModelAttribute("cart")
 	public Cart cart() {
 		return new Cart();
 	}
-	
-	
-	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-	public ModelAndView checkout(@ModelAttribute("cart") Cart cart, WebRequest webReq,
-			SessionStatus status, HttpServletRequest request) {
 
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public ModelAndView checkout(ModelAndView mv, @ModelAttribute("cart") Cart cart, 
+			WebRequest webReq, SessionStatus status, HttpServletRequest request) {
 
 		// add items from cart into orders database
+
+		String userID = cookieMonster.getCookie("username", request).getValue();
+
+		// update products inventory
+		// if product inventory is less than cart item qty then return updated cart (else return null)
+		// return back to cart with message before checkout
+		Cart updatedCart = orderService.addCart(cart, userID);
+		if (null != updatedCart) {
+			
+			cart = updatedCart;
+			mv.setViewName("redirect:/cartUpdated");
+			mv.addObject("cart", cart);
+			return mv;
+		}
 		
+		// reset cart in session
+		status.setComplete();
+		webReq.removeAttribute("cart", WebRequest.SCOPE_SESSION);
+
+		// send to orders summary view with orders from db and products that cant be displayed
+		mv.setViewName("orderSummary");
+		mv.addObject("user", userService.getUser(userID));
+		mv.addObject("order", orderService.getLastOrder(cart, userID));
+
+		return mv;
+	}
+	
+	@RequestMapping(value="/orderhistory", method = RequestMethod.GET)
+	public ModelAndView orderhistory(ModelAndView mv, HttpServletRequest request) {
 		
 		String userID = cookieMonster.getCookie("username", request).getValue();
 		
-		orderService.addCart(cart, userID);
+		List<Order> orderhistory = orderService.getOrderHistory(userID);
 		
-		status.setComplete();
-		webReq.removeAttribute("cart", WebRequest.SCOPE_SESSION);
+		mv.setViewName("orderhistory");
+		mv.addObject("user", userService.getUser(userID));
+		mv.addObject("orderhistory", orderhistory);
 		
-		// update products inventory
-		// if product inventory is less than one -> do not update and mark product
-		// get orders from database
-
-		// send to orders view with orders from db and products that cant be displayed
-		OrderHistory orderHistory = new OrderHistory();
-		orderHistory.setOrders(orderService.getOrderHistory(userID));
-		
-		return new ModelAndView("orderhistory", "orderhistory", orderHistory);
+		return mv;
 	}
-	
 
 }

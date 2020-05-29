@@ -66,7 +66,7 @@ public class UserDao {
 		}
 	}
 	
-	public User getUser(String username, HttpServletResponse response) throws SQLException {
+	public User getUser(String username) throws SQLException {
 		
 		String sql = "Select * from user where username = '" + username + "'";
 		User user = jdbcTemplate.queryForObject(sql, new UserMapper());

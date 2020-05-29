@@ -56,17 +56,17 @@ public class AdminController {
 	public ModelAndView showAdmin(HttpServletRequest request, HttpServletResponse response) {
 		List<Product> products = null;
 		
-		String filter = "all";
-		products = productService.getProducts(filter);
+		
+		products = productService.getProducts("all");
 		
 		System.out.println("number of products: " + products.size());
 		
 		for(Product p : products) {
 			System.out.println(p.getName());
 		}
-		CartRedirectEntity cre = new CartRedirectEntity(products, filter);
 		
-		ModelAndView mv = new ModelAndView("adminhome", "cartRedirectEntity", cre);
+		
+		ModelAndView mv = new ModelAndView("adminhome", "products", products);
 		//mv.addObject("login", new Login());
 
 		return mv;

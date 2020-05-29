@@ -1,14 +1,5 @@
 @charset "ISO-8859-1";
 
-body{
-	background-color:#F5F9E9; 
-	background-size: cover;
-	background-position:center;
-	background-attachment: fixed;
-	width:100%;
-	height:auto;
-}
-
 .image1{
 
 	background-image: url("../images/esports-computer.jpg");

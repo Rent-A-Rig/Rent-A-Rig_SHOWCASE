@@ -42,7 +42,7 @@
   </thead>
   
   <tbody>
-	<c:forEach var="product" items="${cartRedirectEntity.products}">  
+	<c:forEach var="product" items="${products}">  
     	<tr>
       		<td>${product.name}</td>
       		<td>${product.id}</td>
