@@ -1,7 +1,5 @@
 package cova.rar.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Product {
 	
 

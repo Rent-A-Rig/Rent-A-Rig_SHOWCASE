@@ -81,6 +81,20 @@ public class OrderDao {
 
 		return orders;
 	}
+	
+	public Order getLastOrder(String userID) {
+		String sql = "SELECT ORDER_ID, ORDER_DATE FROM orders WHERE USER_ID = " + "'" + userID + "'";
+
+		List<Order> orders = jdbcTemplate.query(sql, new OrderMapper());
+		Order lastOrder = orders.get(0);
+		for (Order order : orders) {
+			if (order.getId() > lastOrder.getId()) {
+				lastOrder = order;
+			}
+		}
+		
+		return lastOrder;
+	}
 
 	class OrderMapper implements RowMapper<Order> {
 
@@ -113,18 +127,6 @@ public class OrderDao {
 
 	}
 
-	public Order getLastOrder(String userID) {
-		String sql = "SELECT ORDER_ID, ORDER_DATE FROM orders WHERE USER_ID = " + "'" + userID + "'";
-
-		List<Order> orders = jdbcTemplate.query(sql, new OrderMapper());
-		Order lastOrder = orders.get(0);
-		for (Order order : orders) {
-			if (order.getId() > lastOrder.getId()) {
-				lastOrder = order;
-			}
-		}
-		
-		return lastOrder;
-	}
+	
 
 }

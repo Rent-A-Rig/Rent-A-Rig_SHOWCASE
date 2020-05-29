@@ -85,6 +85,18 @@ public class CartController {
 
 	}
 	
+	@RequestMapping(value = "/cartUpdated", method = RequestMethod.GET)
+	public ModelAndView showCartPOST(ModelAndView mv, @ModelAttribute("cart") Cart cart,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		mv.setViewName("cart");
+		mv.addObject("cart", cart);
+		mv.addObject("stockUpdateMessge", "Some items were updated to reflect our current stock.");
+		return mv;
+
+
+	}
+	
 	@RequestMapping(value = "/updateCart", method = RequestMethod.POST)
 	public ModelAndView updateCart(@ModelAttribute("cart") Cart cart,
 			HttpServletRequest request, HttpServletResponse response) {
