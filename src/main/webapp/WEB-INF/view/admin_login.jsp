@@ -20,8 +20,8 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 
-		<h2 align="center">Sign-In</h2>
-		<form:form id="loginForm" modelAttribute="login" action="loginProcess"
+		<h2 align="center">Sign-In as Admin</h2>
+		<form:form id="loginForm" modelAttribute="login" action="adminloginprocess"
 			method="post">
 			<table align="center">
 				<div class="form-group">
@@ -54,9 +54,6 @@
 				</tr>
 				<tr>
 					<td><a href="register">Create your Rent-A-Rig account</a></td>
-				</tr>
-				<tr>
-					<td><a href="admin">Sign in as Admin</a></td>
 				</tr>
 			</table>
 		</form:form>

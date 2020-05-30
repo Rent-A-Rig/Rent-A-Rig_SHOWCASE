@@ -51,6 +51,21 @@ public class UserDao {
 		}
 	}
 	
+	public Login validateAdmin(Login login) {
+		String sql = "select * from user where username='" + login.getUsername()
+		+ "' and password='" + login.getPassword() + "'";
+		
+		List<Login> users = jdbcTemplate.query(sql, new LoginMapper());
+		System.out.println("size: "+users.size());
+		
+		if (users.size() > 0) { //and isAdmin == true (after you update the database)
+			return users.get(0);
+		}
+		else {
+			return null;
+		}
+	}
+	
 	public User getUser(String username) throws SQLException {
 		
 		String sql = "Select * from user where username = '" + username + "'";

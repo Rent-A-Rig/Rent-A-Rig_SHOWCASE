@@ -20,25 +20,28 @@ public class UserService {
 	@Autowired
 	CookieMonster cookieMonster;
 
-	public int register(User user) {
-		return userDao.register(user);
+
+  public int register(User user) {
+    return userDao.register(user);
+  }
+
+  public Login validateUser(Login login) {
+    return userDao.validateUser(login);
+  }
+  
+  public Login validateAdmin(Login login) {
+	  return userDao.validateAdmin(login);
+  }
+  public void setUserCookies(HttpServletRequest request, HttpServletResponse response) {
+
+	  String username = cookieMonster.getCookie("username", request).getValue();
+	  User user = null;
+	try {
+		user = userDao.getUser(username);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
-	public Login validateUser(Login login) {
-		return userDao.validateUser(login);
-	}
-
-	public void setUserCookies(HttpServletRequest request, HttpServletResponse response) {
-
-		String username = cookieMonster.getCookie("username", request).getValue();
-		User user = null;
-		try {
-			user = userDao.getUser(username);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		cookieMonster.setCookie("firstname", user.getFirstname(), response);
 		cookieMonster.setCookie("lastname", user.getLastname(), response);
 		cookieMonster.setCookie("phone", user.getPhone(), response);
