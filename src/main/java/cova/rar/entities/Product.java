@@ -10,6 +10,8 @@ public class Product {
 	private String longDesc;
 	private int inventory;
 	private String category;
+	
+	public Product() {};
 
 	public boolean equals(Product product) {
 		if (product.getId().equals(this.id)) {
