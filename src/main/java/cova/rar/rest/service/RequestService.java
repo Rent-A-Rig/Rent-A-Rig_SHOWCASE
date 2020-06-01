@@ -29,8 +29,7 @@ public class RequestService {
 		HttpEntity<RequestedInventory> entity = new HttpEntity<RequestedInventory>(request, headers);
 
 		// send it!
-		ResponseEntity<Void> out = restTemplate.exchange(REQUEST_INVENTORY, HttpMethod.POST, entity
-		    , Void.class);
+		ResponseEntity<Void> out = restTemplate.exchange(REQUEST_INVENTORY, HttpMethod.POST, entity, Void.class);
 		System.out.println(out.getStatusCodeValue());
 	}
 

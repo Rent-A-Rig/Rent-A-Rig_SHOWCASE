@@ -53,6 +53,8 @@
       		</td>
       		<td><button class="btn btn-success"> Request Inventory </button></td>		
     	</tr>
+    	
+
     	<input type="hidden" name="id" value="${product.id}"/>
     </form:form>
 	</c:forEach>

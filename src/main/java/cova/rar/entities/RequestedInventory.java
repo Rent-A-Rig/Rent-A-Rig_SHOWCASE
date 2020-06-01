@@ -10,6 +10,9 @@ public class RequestedInventory {
 	private String product_name;
 	private int request_qty;
 	private Date request_date;
+	private boolean fulfilled;
+	
+	public RequestedInventory() {};
 	
 	public RequestedInventory(Product product, int request_qty) {
 		this.product_id = product.getId();
@@ -67,6 +70,5 @@ public class RequestedInventory {
 		this.fulfilled = fulfilled;
 	}
 
-	private boolean fulfilled;
 
 }

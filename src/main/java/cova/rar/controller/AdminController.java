@@ -38,6 +38,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView showAdminLogin(HttpServletRequest request, HttpServletResponse response) {
+	
 		ModelAndView mv = new ModelAndView("admin_login");
 		mv.addObject("login", new Login());
 
@@ -69,7 +70,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "requestInventory")
+	@RequestMapping(value = "/requestInventory")
 	public ModelAndView sendRequest(@RequestParam("id") String id, @RequestParam("requestQty") int requestQty) {
 		
 		Product product = productService.getProduct(id);
