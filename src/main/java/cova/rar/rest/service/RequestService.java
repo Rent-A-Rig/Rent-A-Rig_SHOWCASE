@@ -13,7 +13,7 @@ import cova.rar.entities.RequestedInventory;
 public class RequestService {
 	
 	private final String ACCESS_TOKEN = "1234123412341234";
-	private final String REQUEST_INVENTORY = "http://localhost:8084/Freddy-s-Surplus-Supplies/requestInventory";
+	private final String REQUEST_INVENTORY = "http://localhost:8083/Freddy-s-Surplus-Supplies/requestInventory";
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -29,9 +29,9 @@ public class RequestService {
 		HttpEntity<RequestedInventory> entity = new HttpEntity<RequestedInventory>(request, headers);
 
 		// send it!
-		ResponseEntity<Void> out = restTemplate.exchange(REQUEST_INVENTORY, HttpMethod.PUT, entity
+		ResponseEntity<Void> out = restTemplate.exchange(REQUEST_INVENTORY, HttpMethod.POST, entity
 		    , Void.class);
-		System.out.println(out.getBody().toString());
+		System.out.println(out.getStatusCodeValue());
 	}
 
 }

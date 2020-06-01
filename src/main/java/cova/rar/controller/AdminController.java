@@ -48,7 +48,6 @@ public class AdminController {
 	public String adminLoginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 		//Login loginUser = userService.
 		if (bindingResult.hasErrors()) {
-			System.out.println("has error!");
 			return "login";
 		}
 		
@@ -61,17 +60,9 @@ public class AdminController {
 	@RequestMapping(value = "/adminhome", method = RequestMethod.GET)
 	public ModelAndView showAdmin(HttpServletRequest request, HttpServletResponse response) {
 		List<Product> products = null;
-		
-		
+			
 		products = productService.getProducts("all");
-		
-		System.out.println("number of products: " + products.size());
-		
-		for(Product p : products) {
-			System.out.println(p.getName());
-		}
-		
-		
+
 		ModelAndView mv = new ModelAndView("adminhome", "products", products);
 		//mv.addObject("login", new Login());
 
