@@ -13,22 +13,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cova.rar.entities.CartRedirectEntity;
 import cova.rar.entities.Login;
 import cova.rar.entities.Product;
+import cova.rar.entities.RequestedInventory;
+import cova.rar.rest.service.RequestService;
 import cova.rar.service.CookieMonster;
 import cova.rar.service.ProductService;
 
 @Controller
-
-
 public class AdminController {
+	
 	@Autowired
 	ProductService productService;
+	
 	@Autowired
 	CookieMonster cookieMonster;
+	
+	@Autowired
+	RequestService requestService;
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView showAdminLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -71,4 +77,15 @@ public class AdminController {
 
 		return mv;
 	}
+	
+	@RequestMapping(value = "requestInventory")
+	public ModelAndView sendRequest(@RequestParam("id") String id, @RequestParam("requestQty") int requestQty) {
+		
+		Product product = productService.getProduct(id);
+		RequestedInventory invRequest = new RequestedInventory(product, requestQty);
+		requestService.sendInventoryRequest(invRequest);
+		
+		return new ModelAndView("redirect:/adminhome");
+	}
+	
 }
