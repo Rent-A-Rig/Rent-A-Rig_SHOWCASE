@@ -84,16 +84,17 @@ public class UserDao {
 		System.out.println(aRows);
 	}
 	
-	public int setAddress(Address address) throws SQLException {
+	public int setAddress(Address address, HttpServletRequest request) throws SQLException {
 		String sql = "insert into address values(?,?,?,?,?,?)";
 		User user = new User();
+		CookieMonster cm = new CookieMonster();
 		
 		String place = address.getPlace();
 		String street = address.getStreet();
 		String city = address.getCity();
 		String state = address.getState();
 		String zip = address.getZip();
-		String username = user.getUsername();
+		String username = cm.getCookie("username", request).getValue();
 		
 		System.out.println(place + street + city + state + zip + "  username: " + username);
 		

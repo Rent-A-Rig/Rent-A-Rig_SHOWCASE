@@ -62,9 +62,9 @@ public class UserService {
 		return null;
 	}
 
-	public void setAddress(Address address) throws SQLException {
+	public void setAddress(Address address, HttpServletRequest request) throws SQLException {
 
-		userDao.setAddress(address);
+		userDao.setAddress(address, request);
 
 	}
 

@@ -45,7 +45,7 @@ public class MyAccountController {
     public ModelAndView myAccount(@ModelAttribute("address") Address address, HttpServletRequest request, HttpServletResponse response) throws SQLException {
         // get info from view
         
-        userService.setAddress(address);
+        userService.setAddress(address, request);
         
         return new ModelAndView("myAccount", "address", address);
     }
