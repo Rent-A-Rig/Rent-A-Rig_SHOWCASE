@@ -46,4 +46,9 @@ public class ProductService {
 		return tabProducts;
 	}
 
+	public boolean updateProductInventory(String product_id, int request_qty) {
+
+		return productDao.updateProductInventory(product_id, request_qty);
+	}
+
 }

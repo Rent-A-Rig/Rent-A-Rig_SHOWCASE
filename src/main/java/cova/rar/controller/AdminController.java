@@ -1,5 +1,6 @@
 package cova.rar.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cova.rar.entities.CartRedirectEntity;
 import cova.rar.entities.Login;
 import cova.rar.entities.Product;
+import cova.rar.entities.ProductRequest;
 import cova.rar.entities.RequestedInventory;
 import cova.rar.rest.service.RequestService;
 import cova.rar.service.CookieMonster;
@@ -80,14 +82,35 @@ public class AdminController {
 	
 	@RequestMapping(value = "/adminhome", method = RequestMethod.GET)
 	public ModelAndView showAdmin(HttpServletRequest request, HttpServletResponse response) {
-		List<Product> products = null;
-			
-		products = productService.getProducts("all");
+		
+		List<ProductRequest> productRequests = new ArrayList<ProductRequest>();
+		List<Product> products = productService.getProducts("all");
+		List<RequestedInventory> pendingRequests = requestService.getPendingRequests();
+		
+		if (null == pendingRequests) {
+			for (Product product : products) {
+				productRequests.add(new ProductRequest(product));
+			}
+			return new ModelAndView("adminhome", "productRequests", productRequests);
+		}
+		else {
+			for (Product product : products) {
+				boolean found = false;
+				for (RequestedInventory pendingReq : pendingRequests) {
+					if (product.getId().equals(pendingReq.getProduct_id())) {
+						found = true;
+						productRequests.add(new ProductRequest(product, pendingReq));
+					}
+				}
+				if (!found) {
+					productRequests.add(new ProductRequest(product));
+				}
+			}
 
-		ModelAndView mv = new ModelAndView("adminhome", "products", products);
-		//mv.addObject("login", new Login());
-
-		return mv;
+			ModelAndView mv = new ModelAndView("adminhome", "productRequests", productRequests);
+			return mv;
+		}
+		
 	}
 	
 	@RequestMapping(value = "/requestInventory")
