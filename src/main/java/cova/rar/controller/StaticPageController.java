@@ -37,22 +37,11 @@ public class StaticPageController {
 		}
 		return new ModelAndView("home");
 	}
-
-	@RequestMapping(value = {"/myAccount"})
-	public ModelAndView myAccount(HttpServletRequest request, HttpServletResponse response) {
-
-		if (!cookieMonster.isLoggedIn(request)) {
-			return new ModelAndView("redirect:/login");
-		}
-		else if (null == cookieMonster.getCookie("firstname", request)) {
-			userService.setUserCookies(request, response);
-			return new ModelAndView("myAccount");
-		}
-		else {
-			return new ModelAndView("myAccount");
-		}
+	
+	@RequestMapping(value = {"/updateinfo"})
+	public ModelAndView updateInfo() {
+		return new ModelAndView("updateinfo");
 	}
-
 	
 	@RequestMapping(value = {"/faq"})
 	public ModelAndView FAQ() {

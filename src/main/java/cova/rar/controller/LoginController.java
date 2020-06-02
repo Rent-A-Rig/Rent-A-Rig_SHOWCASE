@@ -1,5 +1,7 @@
 package cova.rar.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import cova.rar.dao.UserDao;
 import cova.rar.entities.Login;
 import cova.rar.entities.User;
 import cova.rar.service.CookieMonster;
@@ -34,6 +37,9 @@ public class LoginController {
 	@Autowired
 	CookieMonster cookieMonster;
 	
+	@Autowired
+	UserDao userDao;
+	
 	@InitBinder
 	   protected void initBinder(WebDataBinder binder) {
 	      binder.addValidators(loginValidator);
@@ -46,10 +52,9 @@ public class LoginController {
 		return mv;
 	}
 	
-
 	
 	@PostMapping("/loginProcess")
-	public String loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+	public String loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
 	
 		Login loginUser = userService.validateUser(login);
 		if (bindingResult.hasErrors()) {
@@ -60,7 +65,6 @@ public class LoginController {
 		
 		if(loginUser == null) { return "login"; }
 
-		
 		cookieMonster.setLoginCookie(request, response);
 		cookieMonster.setUserCookie2(login, response);
 		

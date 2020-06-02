@@ -1,12 +1,18 @@
 package cova.rar.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import cova.rar.entities.Address;
 import cova.rar.entities.Login;
 import cova.rar.entities.User;
 import cova.rar.service.CookieMonster;
@@ -18,95 +24,131 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserDao {
-	
+
 	@Autowired
 	DataSource dataSource;
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	CookieMonster cookieMonster;
 	
 	public int register(User user) {
-		// TODO check if user already exists
-		
-		//username, first name, last name, shipping, billing, email, phone 
-		String sql = "insert into user values(?,?,?,?,?,?,?)";
-		
-		return jdbcTemplate.update(sql, 
-				new Object[] {user.getUsername(), user.getPassword(), user.getFirstname(),
-						user.getLastname(), user.getAddress().toString(),user.getEmail(),  user.getPhone()});
+
+		// username, password, first name, last name, email, phone
+		String sql = "insert into user values(?,?,?,?,?,?)";
+
+		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getFirstname(),
+				user.getLastname(), user.getEmail(), user.getPhone() });
 	}
-	
+
 	public Login validateUser(Login login) {
-		String sql = "select * from user where username='" + login.getUsername()
-		+ "' and password='" + login.getPassword() + "'";
-		
+		String sql = "select * from user where username='" + login.getUsername() + "' and password='"
+				+ login.getPassword() + "'";
+
 		List<Login> users = jdbcTemplate.query(sql, new LoginMapper());
-		System.out.println("size: "+users.size());
-		
+		System.out.println("size: " + users.size());
+
 		if (users.size() > 0) {
 			return users.get(0);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
-	
+
 	public Login validateAdmin(Login login) {
-		String sql = "select * from user where username='" + login.getUsername()
-		+ "' and password='" + login.getPassword() + "'";
-		
+		String sql = "select * from user where username='" + login.getUsername() + "' and password='"
+				+ login.getPassword() + "'";
+
 		List<Login> users = jdbcTemplate.query(sql, new LoginMapper());
-		System.out.println("size: "+users.size());
-		
-		if (users.size() > 0) { //and isAdmin == true (after you update the database)
+		System.out.println("size: " + users.size());
+
+		if (users.size() > 0) { // and isAdmin == true (after you update the database)
 			return users.get(0);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
-	
-	public User getUser(String username) throws SQLException {
+
+	public void updateAddress(Address address) {
+
+		// update address where type and username match
+		// update other user fields
+
+		String aSql = "UPDATE address set place = '" + address.getPlace() + "', street = '" + address.getStreet() + "', city = '" + 
+				address.getCity() + "', state = '" + address.getState() + "', zip = '" + address.getZip() + "' where username = '" + address.getUsername() + "'";
 		
+
+		int aRows = jdbcTemplate.update(aSql);
+		System.out.println(aRows);
+	}
+	
+	public int setAddress(Address address) throws SQLException {
+		String sql = "insert into address values(?,?,?,?,?,?)";
+		User user = new User();
+		
+		String place = address.getPlace();
+		String street = address.getStreet();
+		String city = address.getCity();
+		String state = address.getState();
+		String zip = address.getZip();
+		String username = user.getUsername();
+		
+		System.out.println(place + street + city + state + zip + "  username: " + username);
+		
+		return jdbcTemplate.update(sql, new Object[] { place, street, city, state, zip, username});
+	}
+	
+	public Address getAddress(String username) throws SQLException {
+		String sql = "Select * from address where username = '" + username + "';";
+		Address address = jdbcTemplate.queryForObject(sql, new AddressMapper());
+		return address;
+	}
+	
+
+	public User getUser(String username) throws SQLException {
+
 		String sql = "Select * from user where username = '" + username + "'";
+		
 		User user = jdbcTemplate.queryForObject(sql, new UserMapper());
 		return user;
-		
+
 	}
-	
+
 	class UserMapper implements RowMapper<User> {
 
 		@Override
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			User user = new User();
-			
+
 			// no address atm
 			user.setUsername(rs.getString("username"));
-		    user.setPassword(rs.getString("password"));
-		    user.setFirstname(rs.getString("first_name"));
-		    user.setLastname(rs.getString("last_name"));
-		    user.setAddress(rs.getString("address"));
-		    user.setEmail(rs.getString("email"));
-		    user.setPhone(rs.getString("phone_number"));
+			user.setPassword(rs.getString("password"));
+			user.setFirstname(rs.getString("first_name"));
+			user.setLastname(rs.getString("last_name"));
+			user.setEmail(rs.getString("email"));
+			user.setPhone(rs.getString("phone_number"));
 
 			return user;
 		}
-		/*
-		 * class LoginMapper implements RowMapper<Login>{
-		 * 
-		 * @Override public Login mapRow(ResultSet rs, int rowNum) throws SQLException {
-		 * Login login = new Login();
-		 * 
-		 * login.setUsername(rs.getString("username"));
-		 * login.setPassword(rs.getString("password"));
-		 * 
-		 * return login; }
-		 * 
-		 * }
-		 */
-		
-		
 	}
 	
+	class AddressMapper implements RowMapper<Address> {
+		
+		@Override
+		public Address mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			Address address = new Address();
+			
+			address.setStreet(rs.getString("street"));
+			address.setCity(rs.getString("city"));
+			address.setState(rs.getString("state"));
+			address.setZip(rs.getString("zip"));
+			address.setPlace(rs.getString("place"));
+			
+			return address;
+		}
+	}
 }
