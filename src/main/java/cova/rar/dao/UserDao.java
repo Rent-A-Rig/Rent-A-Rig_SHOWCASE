@@ -111,10 +111,15 @@ public class UserDao {
 	public User getUser(String username) throws SQLException {
 
 		String sql = "Select * from user where username = '" + username + "'";
-		
-		User user = jdbcTemplate.queryForObject(sql, new UserMapper());
-		return user;
 
+		List<User> users = jdbcTemplate.query(sql, new UserMapper());
+		
+		if(users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
+		
 	}
 
 	class UserMapper implements RowMapper<User> {
