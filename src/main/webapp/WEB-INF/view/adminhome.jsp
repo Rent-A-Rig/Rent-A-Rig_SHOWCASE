@@ -43,14 +43,20 @@
   
   <tbody>
 	<c:forEach var="product" items="${products}">  
+	<form:form modelAttribute="product" action="requestInventory">
     	<tr>
       		<td>${product.name}</td>
       		<td>${product.id}</td>
       		<td>${product.inventory}</td>
-      		<c:if test='${product.inventory < 5}'>
-      			<td><button class="btn btn-success"> Restock </button></td>		
-    		</c:if>
+      		<td>
+      			<input class="requestQty" min="0" name="requestQty" value="0" type="number" />
+      		</td>
+      		<td><button class="btn btn-success"> Request Inventory </button></td>		
     	</tr>
+    	
+
+    	<input type="hidden" name="id" value="${product.id}"/>
+    </form:form>
 	</c:forEach>
   </tbody>
 </table>
