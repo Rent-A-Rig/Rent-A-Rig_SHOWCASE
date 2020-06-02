@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+.table {
+	text-align:center;
+	width: 300px;
+	border: 2px solid;
+	border-radius: 5px;
+	word-spacing: 1em;
+}
+
+h2 {
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing:0.2em;
+}
+
+th {
+	text-align: left;
+	padding: 7px 10px 7px 10px;
+	text-decoration: underline;
+}
+
+td {
+	text-align: right;
+	padding: 7px 10px 7px 10px;
+}
