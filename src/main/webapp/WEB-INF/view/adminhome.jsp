@@ -37,17 +37,20 @@
      	 <th>Product Name</th>
      	 <th>Product ID</th>
       	 <th>Current Product Inventory</th>
-      	 <th>Restock</th>
+      	 <th>Current Amount Requested</th>
+      	 <th>Requested Amount</th>
+      	 <th>Send Request</th>
    		 </tr>
   </thead>
   
   <tbody>
-	<c:forEach var="product" items="${products}">  
+	<c:forEach var="product" items="${productRequests}">  
 	<form:form modelAttribute="product" action="requestInventory">
     	<tr>
       		<td>${product.name}</td>
       		<td>${product.id}</td>
       		<td>${product.inventory}</td>
+      		<td>${product.requestQty}</td>
       		<td>
       			<input class="requestQty" min="0" name="requestQty" value="0" type="number" />
       		</td>

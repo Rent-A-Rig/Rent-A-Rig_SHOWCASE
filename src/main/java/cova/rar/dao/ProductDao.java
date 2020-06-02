@@ -97,6 +97,26 @@ public class ProductDao {
 
 		return itemsOutOfStock;
 	}
+	
+	public boolean updateProductInventory(String product_id, int request_qty) {
+		Product existingProduct = this.getProduct(product_id);
+		int quantity = existingProduct.getInventory() + request_qty;
+		
+		String sql = "UPDATE products SET stock = " + quantity + " WHERE product_id = '" + product_id + "'";
+		int rows = -1;
+		try {
+			rows = jdbcTemplate.update(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (rows > 0 ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	class ProductMapper implements RowMapper<Product> {
 
@@ -117,5 +137,7 @@ public class ProductDao {
 		}
 
 	}
+
+
 
 }

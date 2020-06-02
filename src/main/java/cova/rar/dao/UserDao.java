@@ -92,20 +92,6 @@ public class UserDao {
 
 			return user;
 		}
-		/*
-		 * class LoginMapper implements RowMapper<Login>{
-		 * 
-		 * @Override public Login mapRow(ResultSet rs, int rowNum) throws SQLException {
-		 * Login login = new Login();
-		 * 
-		 * login.setUsername(rs.getString("username"));
-		 * login.setPassword(rs.getString("password"));
-		 * 
-		 * return login; }
-		 * 
-		 * }
-		 */
-		
 		
 	}
 	
