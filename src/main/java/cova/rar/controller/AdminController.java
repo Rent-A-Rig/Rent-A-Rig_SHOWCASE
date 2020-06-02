@@ -25,6 +25,7 @@ import cova.rar.entities.RequestedInventory;
 import cova.rar.rest.service.RequestService;
 import cova.rar.service.CookieMonster;
 import cova.rar.service.ProductService;
+import cova.rar.service.UserService;
 
 @Controller
 public class AdminController {
@@ -38,6 +39,9 @@ public class AdminController {
 	@Autowired
 	RequestService requestService;
 	
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView showAdminLogin(HttpServletRequest request, HttpServletResponse response) {
 	
@@ -48,16 +52,32 @@ public class AdminController {
 	}
 	
 	@PostMapping("/adminloginprocess")
-	public String adminLoginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
-		//Login loginUser = userService.
+	public ModelAndView adminLoginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+		//get loginUser 
+		Login loginUser = userService.validateUser(login);
+		
 		if (bindingResult.hasErrors()) {
-			return "login";
+			return new ModelAndView("admin_login");
 		}
 		
-		//if not admin, return back to login
+		//if loginUser do not exist, return login;
+		ModelAndView m = null;
+		if(loginUser == null) {
+			bindingResult.rejectValue("username", "username","Username or password not found!");
+			
+			m = new ModelAndView("admin_login");
+			return m;	
+		}
+		
+		//if loginUser is not admin, return login;
+		if(!loginUser.getUsername().equals("admin") ) {
+			bindingResult.rejectValue("username", "username", "Sorry, you are not an admin!");
+			return new ModelAndView("admin_login");
+		}
+		
 		cookieMonster.setLoginCookie(request, response);
 		cookieMonster.setUserCookie2(login, response);
-		return "redirect:adminhome";
+		return new ModelAndView("redirect:/adminhome");
 	}
 	
 	@RequestMapping(value = "/adminhome", method = RequestMethod.GET)

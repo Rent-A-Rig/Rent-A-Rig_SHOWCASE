@@ -55,6 +55,9 @@
 				<tr>
 					<td><a href="register">Create your Rent-A-Rig account</a></td>
 				</tr>
+				<tr>
+					<td><a href="login">Sign in as Regular user</a></td>
+				</tr>
 			</table>
 		</form:form>
 	</div>

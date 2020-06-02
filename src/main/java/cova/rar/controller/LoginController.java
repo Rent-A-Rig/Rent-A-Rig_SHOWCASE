@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -49,22 +50,32 @@ public class LoginController {
 
 	
 	@PostMapping("/loginProcess")
-	public String loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 	
 		Login loginUser = userService.validateUser(login);
 		if (bindingResult.hasErrors()) {
 			System.out.println("has error!");
-			return "login";
+			return new ModelAndView("login");
 		}
 		
+		ModelAndView m = null;
+		if(loginUser == null) {
+			bindingResult.rejectValue("username", "username","Username or password not found!");
+			
+			m = new ModelAndView("login");
+			return m;
+			
+		}
+		//if logUser is admin, login as admin and then go adminHome;
+		if(loginUser.getUsername().equals("admin") ) {
+			return new ModelAndView("redirect:/adminhome");
+		}
 		
-		if(loginUser == null) { return "login"; }
-
 		
 		cookieMonster.setLoginCookie(request, response);
 		cookieMonster.setUserCookie2(login, response);
 		
-		return "redirect:home";
+		return new ModelAndView("redirect:/home");
 	}
 	@RequestMapping("/logoutProcess")
 	public String logoutProcess(HttpServletRequest request, HttpServletResponse response) {

@@ -57,7 +57,7 @@ public class RegistrationController {
 	
 	// click on register button
 	@PostMapping("/registerProcess")
-	public String registerProcess(@ModelAttribute("user") @Validated User user, 
+	public ModelAndView registerProcess(@ModelAttribute("user") @Validated User user, 
 		      BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 	      if (bindingResult.hasErrors()) {
@@ -69,13 +69,22 @@ public class RegistrationController {
 	    		 System.out.println(error);
 	    	 }
 	    	 System.out.println();
-	         return "register";
+	         return new ModelAndView("register");
 	      }
-
+	      
+	      
+	      User newUser = userService.getUser(user.getUsername());
+	      ModelAndView m = null;
+	      if (newUser != null) {
+	    	  bindingResult.rejectValue("username", "username","Username already exist! ");
+	    	  m= new ModelAndView("register");
+	    	  return m;
+	      }
 	      userService.register(user);
+	      
 	      cookieMonster.setLoginCookie(request, response);
 	      cookieMonster.setUserCookie(user, response);
-	      return "redirect:home";
+	      return new ModelAndView("redirect:/home");
 	}
 }
 
