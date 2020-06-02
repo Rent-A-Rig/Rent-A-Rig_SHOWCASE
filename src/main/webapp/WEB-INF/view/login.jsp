@@ -23,7 +23,7 @@
 
 		<h2 align="center">Sign-In</h2>
 		
-   			Error: ${error}
+
 		
 		<form:form id="loginForm" modelAttribute="login" action="loginProcess"
 			method="post">
