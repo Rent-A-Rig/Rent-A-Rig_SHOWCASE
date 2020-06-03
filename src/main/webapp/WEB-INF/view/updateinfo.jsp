@@ -6,47 +6,29 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Registration</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>Add Address</title>
+
+<link href='<spring:url value="/resources/css/myAccount.css"/>'
+	rel="stylesheet">
+<link href='<spring:url value="/resources/css/mainStyles.css"/>'
+	rel="stylesheet">
+<!--<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body align="center">
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
-		<h2>Update Account Information</h2>
+		<h2>Update Address</h2>
 		<form:form action="updateMyAccountInfo" method="post"
 			modelAttribute="address">
 			<table align="center">
-				<%-- <div class="form-group">
-					<tr>
-						<td><label for="firstname">First Name: </label>
-						<td><input name="firstname" value="${user.firstname }" /></td>
-					</tr>
-				</div>
-				<div class="form-group">
-					<tr>
-						<td><label for="lastname">Last Name: </label>
-						<td><input name="lastname" value="${user.lastname }" /></td>
-					</tr>
-				</div>
-				<div class="form-group">
-					<tr>
-						<td><label for="email">Email: </label>
-						<td><input name="email" value="${user.email }" /></td>
-					</tr>
-				</div>
-				<div class="form-group">
-					<tr>
-						<td><label for="phone">Phone Number: </label>
-						<td><input name="phone" value="${user.phone }" /></td>
-					</tr>
-				</div> --%>
+
 				<div class="form-group">
 					<tr>
 						<td><input type="hidden" name="username"

@@ -1,7 +1,5 @@
 @charset "ISO-8859-1";
-body {
-	text-align: center;
-	}
+
 .table {
 	text-align:center;
 	width: 300px;
@@ -25,4 +23,8 @@ th {
 td {
 	text-align: right;
 	padding: 7px 10px 7px 10px;
+}
+
+body {
+	text-align: center;
 }

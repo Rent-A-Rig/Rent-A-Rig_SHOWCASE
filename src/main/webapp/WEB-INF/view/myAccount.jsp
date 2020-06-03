@@ -14,12 +14,17 @@
 <link href='<spring:url value="/resources/css/mainStyles.css"/>'
 	rel="stylesheet">
 <!-- <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
+<style type="text/css">
+button {
+	text-align: center;
+}
+</style>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -27,11 +32,11 @@
 
 	<div class="bodystuff">
 		<!--    Model Data = user, Model Name = "user" -->
-		<h2>Account		Information</h2>
-		<table>
-			<tr> 
-			<th colspan="3">Membership Type:</th>
-			<td>Gold Star</td>
+		<h2>Account Information</h2>
+		<table align="center">
+			<tr>
+				<th colspan="3">Membership Type:</th>
+				<td>Gold Star</td>
 			<tr>
 				<th colspan="3">Username:</th>
 				<td>${username}</td>
@@ -84,12 +89,14 @@
 
 	</form:form>
 	<form:form action="orderhistory" method="get">
-	<br>
-	<button name="orderhistory" type="submit" class="btn btn-primary">View Order History</button>
+		<br>
+		<button name="orderhistory" type="submit" class="btn btn-primary">View
+			Order History</button>
 	</form:form>
 	<br>
 	<br>
-	<h6>More Features Will Be Coming Soon... To A Rent-A-Rig Near You! ;)</h6>
+	<h6>More Features Will Be Coming Soon... To A Rent-A-Rig Near You!
+		;)</h6>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
