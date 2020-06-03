@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,8 @@
 						<div>
 							<h6 class="my-0">${item.product.name}</h6>
 							<small class="text-muted">${item.product.category}</small>
-						</div> <span class="text-muted">$${item.product.price}/month</span>
+						</div> <span class="text-muted"><fmt:formatNumber value = "${item.product.price}" 
+         type = "currency"/>/month</span>
 						<div class="number-input md-number-input float-right">	
 							<label for="quantity"><span class="text-muted">Qty</span></label>
 							<input class="quantity" min="0" name="quantity" value="${item.qty}"
@@ -56,7 +58,8 @@
 				</c:forEach>
 					<li class="list-group-item d-flex justify-content-between">
 						<span>Total(USD)</span>
-						<strong>$${cart.total}/month</strong>
+						<strong><fmt:formatNumber value = "${cart.total}" 
+         type = "currency"/>/month</strong>
 					</li>
 					<li class="list-group-item d-flex justify-content-between">
 						<button type="submit" class="submit-btn btn-primary btn-lg btn-block"">Update Cart</button>

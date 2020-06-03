@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +74,9 @@
 										<h3>${product.name}</h3>
 										<p>${product.shortDesc}</p>
 										<p>
-											<b>Pricing: </b> $${product.price}/month
+											<b>Pricing: </b>
+											<fmt:formatNumber value="${product.price}" type="currency" />
+											/month
 										</p>
 
 										<c:if test='${product.inventory < 1}'>
@@ -143,8 +146,8 @@
 						</c:forEach>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="nav-monitors"
-					role="tabpanel" aria-labelledby="nav-monitors-tab">
+				<div class="tab-pane fade" id="nav-monitors" role="tabpanel"
+					aria-labelledby="nav-monitors-tab">
 					<!-- Page Content -->
 					<div class="container">
 						<!-- Page Heading -->
@@ -165,7 +168,9 @@
 										<h3>${product.name}</h3>
 										<p>${product.shortDesc}</p>
 										<p>
-											<b>Pricing: </b> $${product.price}/month
+											<b>Pricing: </b>
+											<fmt:formatNumber value="${product.price}" type="currency" />
+											/month
 										</p>
 
 										<c:if test='${product.inventory < 1}'>
@@ -235,13 +240,14 @@
 						</c:forEach>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="nav-accessories"
-					role="tabpanel" aria-labelledby="nav-accessories-tab">
+				<div class="tab-pane fade" id="nav-accessories" role="tabpanel"
+					aria-labelledby="nav-accessories-tab">
 					<!-- Page Content -->
 					<div class="container">
 						<!-- Page Heading -->
 						<h1 class="my-4">
-							Gaming Accessories <small>The right tools to pair with a powerful rig!</small>
+							Gaming Accessories <small>The right tools to pair with a
+								powerful rig!</small>
 						</h1>
 						<!-- Gaming Rigs -->
 						<c:forEach var="product" items="${tabThree}">
@@ -257,7 +263,8 @@
 										<h3>${product.name}</h3>
 										<p>${product.shortDesc}</p>
 										<p>
-											<b>Pricing: </b> $${product.price}/month
+											<b>Pricing: </b> <fmt:formatNumber value = "${product.price}" 
+         type = "currency"/>/month
 										</p>
 
 										<c:if test='${product.inventory < 1}'>

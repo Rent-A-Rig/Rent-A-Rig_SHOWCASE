@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	<link href='<c:url value="/resources/css/orders.css"/>'
-	rel="stylesheet">
-	<link href='<c:url value="/resources/css/mainStyles.css"/>'
+<link href='<c:url value="/resources/css/orders.css"/>' rel="stylesheet">
+<link href='<c:url value="/resources/css/mainStyles.css"/>'
 	rel="stylesheet">
 </head>
 <body>
@@ -33,7 +33,7 @@
 			<div class="col-xs-12 order-container">
 				<div class="grid invoice">
 					<div class="grid-body">
-						<c:forEach var="order" items="${orderhistory}" >
+						<c:forEach var="order" items="${orderhistory}">
 							<div class="invoice-title">
 								<div class="row">
 									<div class="col-xs-12">
@@ -91,8 +91,8 @@
 													<td class="order-row"><strong>${item.product.name}</strong><br>
 														${item.product.shortDesc}</td>
 													<td class="text-center">${item.qty}</td>
-													<td class="text-right">$${item.product.price *
-														item.qty}</td>
+													<td class="text-right"><fmt:formatNumber
+															value="${item.product.price * item.qty}" type="currency" />/month</td>
 												</tr>
 											</c:forEach>
 											<tr>
@@ -103,7 +103,8 @@
 											<tr>
 												<td colspan="1"></td>
 												<td class="text-right"><strong>Total</strong></td>
-												<td class="text-right"><strong>$${order.total}</strong></td>
+												<td class="text-right"><strong><fmt:formatNumber
+															value="${order.total}" type="currency" />/month</strong></td>
 											</tr>
 										</tbody>
 									</table>
