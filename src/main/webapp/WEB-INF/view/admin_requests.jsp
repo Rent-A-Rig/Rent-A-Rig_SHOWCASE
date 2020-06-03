@@ -45,35 +45,29 @@
 			</ul>
 		</nav>
 	</div>
-	<h1>Make A New Inventory Request with Freddy's Surplus Supply</h1>
+	<h1>${title}</h1>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
 				<th>Product Name</th>
 				<th>Product ID</th>
-				<th>Current Product Inventory</th>
-				<th>Current Amount Requested</th>
 				<th>Requested Amount</th>
-				<th>Send Request</th>
+				<th>Request Status</th>
+				<th>Request Date</th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<c:forEach var="product" items="${productRequests}">
+			<c:forEach var="request" items="${requests}">
 				<form:form modelAttribute="product" action="requestInventory">
 					<tr>
-						<td>${product.name}</td>
-						<td>${product.id}</td>
-						<td>${product.inventory}</td>
-						<td>${product.requestQty}</td>
-						<td><input class="requestQty" min="0" name="requestQty"
-							value="0" type="number" /></td>
-						<td><button class="btn btn-success">Request
-								Inventory</button></td>
+						<td>${request.product_name}</td>
+						<td>${request.product_id}</td>
+						<td>${request.request_qty}</td>
+						<td>${request.fulfilled}</td>
+						<td>${request.request_date}</td>
 					</tr>
 
-
-					<input type="hidden" name="id" value="${product.id}" />
 				</form:form>
 			</c:forEach>
 		</tbody>

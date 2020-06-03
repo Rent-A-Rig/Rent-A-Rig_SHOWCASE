@@ -10,7 +10,7 @@ public class RequestedInventory {
 	private String product_name;
 	private int request_qty;
 	private Date request_date;
-	private boolean fulfilled;
+	private String fulfilled;
 	
 	public RequestedInventory() {};
 	
@@ -19,7 +19,7 @@ public class RequestedInventory {
 		this.product_name = product.getName();
 		this.request_qty = request_qty;
 		this.request_date = new Date(Calendar.getInstance().getTime().getTime());;
-		this.fulfilled = false;
+		this.fulfilled = "PENDING";
 	}
 	
 	public String getProduct_name() {
@@ -62,11 +62,11 @@ public class RequestedInventory {
 		this.request_date = request_date;
 	}
 
-	public boolean isFulfilled() {
+	public String getFulfilled() {
 		return fulfilled;
 	}
 
-	public void setFulfilled(boolean fulfilled) {
+	public void setFulfilled(String fulfilled) {
 		this.fulfilled = fulfilled;
 	}
 

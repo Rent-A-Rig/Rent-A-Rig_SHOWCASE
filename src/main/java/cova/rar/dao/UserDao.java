@@ -147,6 +147,7 @@ public class UserDao {
 
 			return user;
 		}
+
 	}
 
 	class AddressMapper implements RowMapper<Address> {

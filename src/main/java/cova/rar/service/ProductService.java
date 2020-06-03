@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cova.rar.dao.ProductDao;
 import cova.rar.entities.Product;
+import cova.rar.entities.RequestedInventory;
 
 public class ProductService {
 	
@@ -44,6 +45,11 @@ public class ProductService {
 		}
 		
 		return tabProducts;
+	}
+
+	public boolean updateProductInventory(String product_id, int request_qty) {
+
+		return productDao.updateProductInventory(product_id, request_qty);
 	}
 
 }

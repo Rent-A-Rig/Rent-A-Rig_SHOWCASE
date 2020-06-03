@@ -37,7 +37,7 @@ public class StaticPageController {
 		}
 		return new ModelAndView("home");
 	}
-	
+
 	@RequestMapping(value = {"/updateinfo"})
 	public ModelAndView updateInfo() {
 		return new ModelAndView("updateinfo");
