@@ -43,12 +43,19 @@
 			</ul>
 
 			<c:if test="${cookie.username != null}">
+
 				<div class="collapse navbar-collapse" id="#navbars">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item"><a class="nav-link" href="myAccount">Account</a>
 						</li>
 						<li class="nav-item"><a class="nav-link">Welcome
 								${cookie.username.value}!</a></li>
+						
+						<c:if test="${cookie.username.value == 'admin'}">	
+						<li class="nav-item"><a class="nav-link"
+							href="adminhome">Admin Page</a></li>
+						</c:if>
+						
 						<li class="nav-item"><a class="nav-link" href="logoutProcess">LogOut</a>
 						</li>
 					</ul>

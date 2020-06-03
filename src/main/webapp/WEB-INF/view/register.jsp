@@ -94,9 +94,9 @@
 			<tr>
 				<td><a href="login">Already have an account ? Sign-In</a></td>
 			</tr>
-			<tr>
+<!-- 			<tr>
 				<td><a href="admin">Sign in as Admin</a></td>
-			</tr>
+			</tr> -->
 		</table>
 	</form:form>
 	</div>
