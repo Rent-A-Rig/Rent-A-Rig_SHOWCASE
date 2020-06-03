@@ -49,6 +49,11 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link">Welcome
 							${cookie.username.value}!</a></li>
+					
+					<c:if test="${cookie.username.value == 'admin'}">	
+						<li class="nav-item"><a class="nav-link"
+							href="adminhome">Go to Admin page</a></li>
+					</c:if>
 					<li class="nav-item"><a class="nav-link" href="logoutProcess">LogOut</a>
 				</li>
 				</ul>
