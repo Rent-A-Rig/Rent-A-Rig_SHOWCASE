@@ -43,6 +43,7 @@ public class StaticPageController {
 		return new ModelAndView("updateinfo");
 	}
 	
+	
 	@RequestMapping(value = {"/faq"})
 	public ModelAndView FAQ() {
 		return new ModelAndView("FAQ");

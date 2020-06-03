@@ -86,7 +86,7 @@ public class LoginController {
 		Address address = userDao.getAddress(login.getUsername());
 		System.out.println("using userdao in loginprocess" + address);
 		User user = userDao.getUser(login.getUsername());
-
+		
 		HttpSession session = request.getSession();
 		
 			session.setAttribute("streetatt", address.getStreet());
@@ -99,7 +99,7 @@ public class LoginController {
 			session.setAttribute("lastname", user.getLastname());
 			session.setAttribute("email", user.getEmail());
 			session.setAttribute("phone", user.getPhone());
-////		
+
 		userDao.getAddress(login.getUsername());
 		System.out.println("loginprocess" + login.getUsername());
 

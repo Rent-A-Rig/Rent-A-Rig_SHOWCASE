@@ -18,7 +18,18 @@ public class User {
 	private String lastname;
 	private String email;
 	private String phone;
+	private String blank = "__";
 	
+	public String getBlank() {
+		return blank;
+	}
+
+
+	public void setBlank(String blank) {
+		this.blank = blank;
+	}
+
+
 	public User() {
 	}
 
