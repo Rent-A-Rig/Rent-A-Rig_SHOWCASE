@@ -59,16 +59,14 @@
 							<div class="col-xs-6 float-left">
 								<address>
 									<strong>Billed To:</strong><br>${user.firstname} ${user.lastname}<br>
-									${user.address.line1}, ${user.address.line2}<br>
-									${user.address.state}, ${user.address.zip}<br> <abbr
+									 <abbr
 										title="Phone">P:</abbr> ${user.phone}
 								</address>
 							</div>
 							<div class="col-xs-6 text-right float-right">
 								<address>
 									<strong>Shipped To:</strong><br>${user.firstname} ${user.lastname}<br>
-									${user.address.line1}, ${user.address.line2}<br>
-									${user.address.state}, ${user.address.zip}<br> <abbr
+									 <abbr
 										title="Phone">P:</abbr> ${user.phone}
 								</address>
 							</div>
