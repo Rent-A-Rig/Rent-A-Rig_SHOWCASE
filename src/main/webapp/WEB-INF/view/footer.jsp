@@ -22,11 +22,10 @@
 					<h6 class="text-uppercase mb-4 font-weight-bold">Rent-A-Rig</h6>
 					<p>At Rent-A-Rig, we understand the importance of receiving the
 						highest quality equipment delivered safely, on time, and
-						stress-free to your event. We rent powerful gaming machines,
-						notebooks, and tablets featuring Intel architecture, and monitors,
-						and other needs for your event. With professionally managed
+						stress-free to your door. We rent powerful gaming machines,
+						portables, and accessories. With professionally managed
 						inventory and competitive pricing, you can trust us with your
-						technology, performance, and budgetary needs.</p>
+						technological needs.</p>
 				</div>
 				<!-- Grid column -->
 				<hr class="w-100 clearfix d-md-none">
@@ -70,13 +69,13 @@
 				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
 					<h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
 					<p>
-						<i class="fas fa-home mr-3"></i> Seattle, WA 98106, US
+						&diams; Seattle, WA 98106, US
 					</p>
 					<p>
-						<i class="fas fa-envelope mr-3"></i>Rent.A.Rig@email.com
+						 &diams; Rent.A.Rig@email.com
 					</p>
 					<p>
-						<i class="fas fa-phone mr-3"></i> (206) 555-5555
+						 &diams; (206) 555-5555
 					</p>
 				</div>
 				<!-- Grid column -->
@@ -89,13 +88,13 @@
 				<div class="col-md-7 col-lg-8">
 					<!--Copyright-->
 					<p class="text-center text-md-left">
-						© 2020 Copyright: <a href="home"> <strong>RentARig</strong>
+						&copy;2020 Copyright: <a href="home"> <strong>RentARig</strong>
 						</a>
 					</p>
 				</div>
 				<!-- Grid column -->
 				<div class="container">
-					<h4>Cova Corporations</h4>
+					
 					<hr>
 					<div class="text-center center-block">
 						<p class="txt-railway">- Connect with us on social media! -</p>
