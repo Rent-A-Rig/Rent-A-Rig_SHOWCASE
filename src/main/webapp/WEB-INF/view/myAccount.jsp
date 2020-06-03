@@ -83,8 +83,9 @@ button {
 				<hr>
 				<p>
 		</table>
-		<button id="updateinfo" name="updateinfo" class="btn btn-primary">Update
+		<button id="addaddress" name="addaddress" class="btn btn-primary">Add an
 			Address here</button>
+			<button id="updateinfo" name="updateinfo" class="btn btn-primary">Change address here</button>
 	</div>
 
 	</form:form>
