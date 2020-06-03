@@ -3,103 +3,100 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>My Account</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href='<spring:url value="/resources/css/myAccount.css"/>'
+	rel="stylesheet">
+<link href='<spring:url value="/resources/css/mainStyles.css"/>'
+	rel="stylesheet">
+<!-- <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<style>
-.bodystuff {
-	font-family: arial;
-	color: dark-grey;
-	margin-top: 20px;
-}
-
-.welcome1 {
-	font-size: 48;
-	letter-spacing: 0.2em;
+</head>
+<style type="text/css">
+button {
 	text-align: center;
-	border: 1px solid #665544;
-	paddint: 10px;
-}
-
-p {
-	padding: 15px;
-}
-
-h2 {
-	letter-spacing: 0.2em;
-	text-align: center;
-	border: 1px solid #665544;
-	paddint: 10px;
 }
 </style>
-</head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<jsp:include page="header.jsp"></jsp:include>
 	<br>
-	<div class="welcome1">
-		<h1>W * E * L * C * O * M * E</h1>
-		<h5>this your your account information page... Please don't let
-			anyone else see it. that's how identity theft happens.</h5>
-	</div>
+
 	<div class="bodystuff">
+		<!--    Model Data = user, Model Name = "user" -->
+		<h2>Account Information</h2>
+		<table align="center">
+			<tr>
+				<th colspan="3">Membership Type:</th>
+				<td>Gold Star</td>
+			<tr>
+				<th colspan="3">Username:</th>
+				<td>${username}</td>
+			</tr>
+			<tr>
+				<th colspan="3">First name:</th>
+				<td>${firstname}</td>
+			</tr>
+			<tr>
+				<th colspan="3">Last name:</th>
+				<td>${lastname}</td>
+			</tr>
+			<tr>
+				<th colspan="3">Email:</th>
+				<td>${email}</td>
+			</tr>
+			<tr>
+				<th colspan="3">Phone Number:</th>
+				<td>${phone}</td>
+			</tr>
+			<form:form action="updateinfo" method="post" modelAttribute="address">
+				<tr>
+					<th colspan="3">Type of Address:</th>
+					<td>${placeatt}</td>
+				</tr>
+				<tr>
+					<th colspan="3">Street Address:</th>
+					<td>${streetatt}</td>
+				</tr>
+				<tr>
+					<th colspan="3">City:</th>
+					<td>${cityatt}</td>
+				</tr>
+				<tr>
+					<th colspan="3">State:</th>
+					<td>${stateatt}</td>
+				</tr>
+				<tr>
+					<th colspan="3">Zip:</th>
+					<td>${zipatt}</td>
+				</tr>
 
-		<!-- 	Model Data = user, Model Name = "user" -->
 
-		<p>
-			<u>Username:</u><br>${user.username}</p>
-		<br>
-		<form:form action="updateMyAccountInfo" method="post"
-			modelAttribute="user">
-			<p>
-				<u>first name:</u><br> ${user.firstname}
-				<form:input path="username" name="username" id="username" value="${user.username}"/>
-			</p>
-			<br>
-			<p>
-				<u>last name:</u><br> ${user.lastname}
-			</p>
-			<br>
-			<p>
-				<u>email:</u><br> ${user.email}
-			</p>
-			<br>
-			<p>
-				<u>phone:</u><br> ${cookie.phone.value}
-			</p>
-			<br>
-			<p>
-				<u>phone:</u><br> ${user.address.line1}
-			</p>
-			<br>
-			<p>
-				<u>phone:</u><br> ${user.address.city}
-			</p>
-			<br>
-			<p>
-				<u>phone:</u><br> ${user.address.state}
-			</p>
-			<br>
-			<p>
-				<u>phone:</u><br> ${user.address.zip}
-			</p>
-		</form:form>
-		>
+				<hr>
+				<p>
+		</table>
+		<button id="updateinfo" name="updateinfo" class="btn btn-primary">Update
+			Address here</button>
 	</div>
-	<br>
-	<br>
-	<h2>More Features Will Be Coming Soon... To A Rent-A-Rig Near You!
-		;)</h2>
-	<br>
-	<a href="orderhistory"> View Order History </a>
-	<jsp:include page="footer.jsp"></jsp:include>
 
+	</form:form>
+	<form:form action="orderhistory" method="get">
+		<br>
+		<button name="orderhistory" type="submit" class="btn btn-primary">View
+			Order History</button>
+	</form:form>
+	<br>
+	<br>
+	<h6>More Features Will Be Coming Soon... To A Rent-A-Rig Near You!
+		;)</h6>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

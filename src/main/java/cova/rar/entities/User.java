@@ -14,22 +14,12 @@ public class User {
 	
 	private String username;	
 	private String password;
-	
-	
 	private String firstname;
 	private String lastname;
-
 	private String email;
-
-	private Address address;
 	private String phone;
 	
 	public User() {
-		this.address = new Address();
-		address.setLine1("");
-		address.setLine2("");
-		address.setState("");
-		address.setZip("");
 	}
 
 
@@ -44,7 +34,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", email=" + email + ", address=" + address.toString() + ", phone=" + phone + "]";
+				+ lastname + ", email=" + email +  ", phone=" + phone + "]";
 	}
 
 	public String getPassword() {
@@ -79,18 +69,6 @@ public class User {
 		this.email = email;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(String string) {
-		Address newadd = new Address();
-		newadd.setLine1(string);
-		newadd.setLine2("");
-		newadd.setState("");
-		newadd.setZip("");
-		this.address = newadd;
-	}
 
 	public String getPhone() {
 		return phone;
