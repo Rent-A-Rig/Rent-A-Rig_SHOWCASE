@@ -68,6 +68,10 @@ public class LoginController {
 		}
 		//if logUser is admin, login as admin and then go adminHome;
 		if(loginUser.getUsername().equals("admin") ) {
+			
+			cookieMonster.setLoginCookie(request, response);
+			cookieMonster.setUserCookie2(login, response);
+			
 			return new ModelAndView("redirect:/adminhome");
 		}
 		
