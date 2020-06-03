@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import cova.rar.entities.Item;
 import cova.rar.entities.Product;
+import cova.rar.entities.RequestedInventory;
 
 public class ProductDao {
 
@@ -31,7 +32,7 @@ public class ProductDao {
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	public List<Product> getCategory(String category) {
@@ -47,13 +48,10 @@ public class ProductDao {
 	}
 
 	public List<Product> getSearch(String search) {
-		
-		String sql = "select * from products where "
-				+ "PRODUCT_NAME LIKE '%" + search + "%'"
-						+ "OR SHORT_DESC LIKE '%" + search + "%'"
-						+ "OR LONG_DESC LIKE '%" + search + "%'";
-		
-		
+
+		String sql = "select * from products where " + "PRODUCT_NAME LIKE '%" + search + "%'" + "OR SHORT_DESC LIKE '%"
+				+ search + "%'" + "OR LONG_DESC LIKE '%" + search + "%'";
+
 		List<Product> products = jdbcTemplate.query(sql, new ProductMapper());
 		System.out.println(products.size());
 		if (products.size() > 0) {
@@ -62,19 +60,19 @@ public class ProductDao {
 			return null;
 		}
 	}
-	
+
 	public Product getProduct(String prodID) {
 		String sql = "select * from products where PRODUCT_ID = " + "\"" + prodID + "\"";
-		
+
 		return jdbcTemplate.queryForObject(sql, new ProductMapper());
 	}
-	
+
 	public List<Item> removeInventory(List<Item> items) {
 		List<Item> itemsOutOfStock = new ArrayList<Item>();
 		for (Item item : items) {
 
 			String prodID = item.getProduct().getId();
-			String qtyStmt = "SELECT STOCK FROM PRODUCTS WHERE PRODUCT_ID = "  + "\"" + prodID + "\"";
+			String qtyStmt = "SELECT STOCK FROM PRODUCTS WHERE PRODUCT_ID = " + "\"" + prodID + "\"";
 
 			int qty = (int) jdbcTemplate.queryForObject(qtyStmt, new RowMapper<Integer>() {
 
@@ -88,8 +86,7 @@ public class ProductDao {
 				qty -= item.getQty();
 				String updateStmt = "UPDATE PRODUCTS SET STOCK = " + qty + " WHERE PRODUCT_ID= " + "\"" + prodID + "\"";
 				jdbcTemplate.execute(updateStmt);
-			}
-			else {
+			} else {
 				itemsOutOfStock.add(item);
 			}
 
@@ -97,11 +94,11 @@ public class ProductDao {
 
 		return itemsOutOfStock;
 	}
-	
+
 	public boolean updateProductInventory(String product_id, int request_qty) {
 		Product existingProduct = this.getProduct(product_id);
 		int quantity = existingProduct.getInventory() + request_qty;
-		
+
 		String sql = "UPDATE products SET stock = " + quantity + " WHERE product_id = '" + product_id + "'";
 		int rows = -1;
 		try {
@@ -109,11 +106,10 @@ public class ProductDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		if (rows > 0 ) {
+
+		if (rows > 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -137,7 +133,6 @@ public class ProductDao {
 		}
 
 	}
-
 
 
 }

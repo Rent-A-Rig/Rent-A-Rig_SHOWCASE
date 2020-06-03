@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cova.rar.dao.ProductDao;
 import cova.rar.entities.Product;
+import cova.rar.entities.RequestedInventory;
 
 public class ProductService {
 	
