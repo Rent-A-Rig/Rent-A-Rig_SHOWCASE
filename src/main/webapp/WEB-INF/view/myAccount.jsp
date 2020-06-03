@@ -34,44 +34,44 @@
 			<td>Gold Star</td>
 			<tr>
 				<th colspan="3">Username:</th>
-				<td>${cookie.username.value}</td>
+				<td>${username}</td>
 			</tr>
 			<tr>
 				<th colspan="3">First name:</th>
-				<td>${cookie.firstname.value}</td>
+				<td>${firstname}</td>
 			</tr>
 			<tr>
 				<th colspan="3">Last name:</th>
-				<td>${cookie.lastname.value}</td>
+				<td>${lastname}</td>
 			</tr>
 			<tr>
 				<th colspan="3">Email:</th>
-				<td>${cookie.email.value}</td>
+				<td>${email}</td>
 			</tr>
 			<tr>
 				<th colspan="3">Phone Number:</th>
-				<td>${cookie.phone.value}</td>
+				<td>${phone}</td>
 			</tr>
 			<form:form action="updateinfo" method="post" modelAttribute="address">
 				<tr>
 					<th colspan="3">Type of Address:</th>
-					<td>${address.place}</td>
+					<td>${placeatt}</td>
 				</tr>
 				<tr>
 					<th colspan="3">Street Address:</th>
-					<td>${address.street}</td>
+					<td>${streetatt}</td>
 				</tr>
 				<tr>
 					<th colspan="3">City:</th>
-					<td>${address.city}</td>
+					<td>${cityatt}</td>
 				</tr>
 				<tr>
 					<th colspan="3">State:</th>
-					<td>${address.state}</td>
+					<td>${stateatt}</td>
 				</tr>
 				<tr>
 					<th colspan="3">Zip:</th>
-					<td>${address.zip}</td>
+					<td>${zipatt}</td>
 				</tr>
 
 
@@ -79,14 +79,17 @@
 				<p>
 		</table>
 		<button id="updateinfo" name="updateinfo" class="btn btn-primary">Update
-			your info here</button>
+			Address here</button>
 	</div>
 
 	</form:form>
+	<form:form action="orderhistory" method="get">
+	<br>
+	<button name="orderhistory" type="submit" class="btn btn-primary">View Order History</button>
+	</form:form>
+	<br>
 	<br>
 	<h6>More Features Will Be Coming Soon... To A Rent-A-Rig Near You! ;)</h6>
-	<br>
-	<a href="orderhistory"> View Order History </a>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

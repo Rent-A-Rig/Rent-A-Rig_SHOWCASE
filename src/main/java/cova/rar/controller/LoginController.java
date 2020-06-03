@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cova.rar.dao.UserDao;
+import cova.rar.entities.Address;
 import cova.rar.entities.Login;
 import cova.rar.entities.User;
 import cova.rar.service.CookieMonster;
@@ -56,7 +58,7 @@ public class LoginController {
 	
 	@PostMapping("/loginProcess")
 
-	public ModelAndView loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView loginProcess(@Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException {
 	
 		Login loginUser = userService.validateUser(login);
 		if (bindingResult.hasErrors()) {
@@ -79,6 +81,25 @@ public class LoginController {
 		
 		cookieMonster.setLoginCookie(request, response);
 		cookieMonster.setUserCookie2(login, response);
+		
+		Address address = userDao.getAddress(login.getUsername());
+		System.out.println("using userdao in loginprocess" + address);
+		User user = userDao.getUser(login.getUsername());
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("streetatt", address.getStreet());
+		session.setAttribute("cityatt", address.getCity());
+		session.setAttribute("stateatt", address.getState());
+		session.setAttribute("zipatt", address.getZip());
+		session.setAttribute("placeatt", address.getPlace());
+		session.setAttribute("username", user.getUsername());
+		session.setAttribute("firstname", user.getFirstname());
+		session.setAttribute("lastname", user.getLastname());
+		session.setAttribute("email", user.getEmail());
+		session.setAttribute("phone", user.getPhone());
+////		
+		userDao.getAddress(login.getUsername());
+		System.out.println("loginprocess" + login.getUsername());
 		
 		return new ModelAndView("redirect:/home");
 	}

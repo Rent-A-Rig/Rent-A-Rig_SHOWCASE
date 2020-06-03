@@ -91,21 +91,21 @@
 					<div class="mb-3">
 						<label for="email">Email <span class="text-muted">(Optional)</span></label>
 						<input type="email" class="form-control" id="email"
-							placeholder="you@example.com">
+							placeholder="${cookie.email.value}">
 						<div class="invalid-feedback">Please enter a valid email
 							address for shipping updates.</div>
 					</div>
 					<div class="mb-3">
 						<label for="address">Address</label> <input type="text"
-							class="form-control" id="address" placeholder="1234 Main St"
+							class="form-control" id="address" value="${streetatt }"
 							required="">
 						<div class="invalid-feedback">Please enter your shipping
 							address.</div>
 					</div>
 					<div class="mb-3">
-						<label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+						<label for="address2">City <span class="text-muted"></span></label>
 						<input type="text" class="form-control" id="address2"
-							placeholder="Apartment or suite">
+							value="${cityatt }">
 					</div>
 					<div class="row">
 						<div class="col-md-5 mb-3">
@@ -178,7 +178,7 @@
 						</div>
 						<div class="col-md-3 mb-3">
 							<label for="zip">Zip</label> <input type="text"
-								class="form-control" id="zip" placeholder="" required="">
+								class="form-control" id="zip" value="${zipatt }" required="">
 							<div class="invalid-feedback">Zip code required.</div>
 						</div>
 					</div>

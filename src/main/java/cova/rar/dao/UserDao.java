@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import cova.rar.entities.Address;
@@ -33,7 +34,7 @@ public class UserDao {
 
 	@Autowired
 	CookieMonster cookieMonster;
-	
+
 	public int register(User user) {
 
 		// username, password, first name, last name, email, phone
@@ -76,50 +77,57 @@ public class UserDao {
 		// update address where type and username match
 		// update other user fields
 
-		String aSql = "UPDATE address set place = '" + address.getPlace() + "', street = '" + address.getStreet() + "', city = '" + 
-				address.getCity() + "', state = '" + address.getState() + "', zip = '" + address.getZip() + "' where username = '" + address.getUsername() + "'";
-		
+		String aSql = "UPDATE address set place = '" + address.getPlace() + "', street = '" + address.getStreet()
+				+ "', city = '" + address.getCity() + "', state = '" + address.getState() + "', zip = '"
+				+ address.getZip() + "' where username = '" + address.getUsername() + "'";
 
 		int aRows = jdbcTemplate.update(aSql);
 		System.out.println(aRows);
 	}
-	
+
 	public int setAddress(Address address, HttpServletRequest request) throws SQLException {
 		String sql = "insert into address values(?,?,?,?,?,?)";
 		User user = new User();
 		CookieMonster cm = new CookieMonster();
-		
+
 		String place = address.getPlace();
 		String street = address.getStreet();
 		String city = address.getCity();
 		String state = address.getState();
 		String zip = address.getZip();
 		String username = cm.getCookie("username", request).getValue();
-		
-		System.out.println(place + street + city + state + zip + "  username: " + username);
-		
-		return jdbcTemplate.update(sql, new Object[] { place, street, city, state, zip, username});
+
+		System.out.println("setAddress, userdao" + place + street + city + state + zip + "  username: " + username);
+
+		return jdbcTemplate.update(sql, new Object[] { place, street, city, state, zip, username });
 	}
-	
-	public Address getAddress(String username) throws SQLException {
-		String sql = "Select * from address where username = '" + username + "';";
-		Address address = jdbcTemplate.queryForObject(sql, new AddressMapper());
-		return address;
+
+	public Address getAddress(String username) throws SQLException, ClassNotFoundException {
+
+		final String sql = "Select * from address where username = '" + username + "';";
+
+		List<Address> addresses = jdbcTemplate.query(sql, new AddressMapper());
+		System.out.println("get address userdao");
+		
+		if (addresses.size() > 0) {
+			return addresses.get(0);
+		} else {
+			return null;
+		}
 	}
-	
 
 	public User getUser(String username) throws SQLException {
 
 		String sql = "Select * from user where username = '" + username + "'";
 
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
-		
-		if(users.size() > 0) {
+
+		if (users.size() > 0) {
 			return users.get(0);
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	class UserMapper implements RowMapper<User> {
@@ -140,21 +148,22 @@ public class UserDao {
 			return user;
 		}
 	}
-	
+
 	class AddressMapper implements RowMapper<Address> {
-		
-		@Override
+
 		public Address mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
+
 			Address address = new Address();
-			
+
 			address.setStreet(rs.getString("street"));
 			address.setCity(rs.getString("city"));
 			address.setState(rs.getString("state"));
 			address.setZip(rs.getString("zip"));
 			address.setPlace(rs.getString("place"));
+			System.out.println("addressmapper" + address.getPlace() + address.getStreet() + address.getState() + address.getZip() + address.getCity());
 			
 			return address;
 		}
+
 	}
 }
